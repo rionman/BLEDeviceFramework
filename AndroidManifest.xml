@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.android.framework.ble"
+    android:versionCode="1"
+    android:versionName="1.0" >
+	
+    <!-- BLEService Request permission  -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-feature android:name="android.hardware.bluetoot_le"
+        android:required="true"/>
+    <uses-permission android:name="com.android.ble.permission.broadcast"/>
+    
+    
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="19" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        
+        <activity
+            android:name="com.android.ble.sample.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <service 
+            android:name="com.android.framework.ble.service.BLEBackgroundService"
+            android:process="com.android.bleservice" >
+            <intent-filter>
+                <action android:name="android.intent.action.BLESERVICE"/>
+            </intent-filter>
+        </service>
+        
+        <receiver
+            android:name="com.android.framework.ble.BLEDeviceReceiver">
+            <intent-filter>
+                <action android:name="com.andrid.ble.ACTION_FOUND_BLEDEVICE"/>
+            </intent-filter>
+        </receiver>
+                 
+    </application>
+
+</manifest>
